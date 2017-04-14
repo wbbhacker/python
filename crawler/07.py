@@ -16,6 +16,8 @@ opener = urllib2.build_opener(handler)
 response = opener.open("http://www.baidu.com")
 cookie.save(ignore_discard=True, ignore_expires=True)
 #保存cookie到文件
+
+
 '''
 import cookielib
 import urllib2
