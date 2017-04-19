@@ -20,9 +20,13 @@ class naruto:
 
 		browser = webdriver.PhantomJS('phantomjs')
 		browser.get(url)
+		elem = browser.find_element_by_id('comicContain').find_elements_by_css_selector('img')
+		for i in elem :
 
-		
-		print  browser.find_element_by_id('comicTitle')
+			print i.get_attribute('src')
+
+
+		# print  browser.find_element_by_id('comicTitle')
 
 
 
@@ -69,7 +73,9 @@ if __name__ == '__main__':
 	# url = 'http://ac.tc.qq.com/store_file_download?buid=15017&uin=1468625909&dir_path=/&name=16_07_38_51ce7aa442438201fa8d052de6fcfaf4_3193.jpg'
 	# save_path = 'img/2.jpg'
 
-	demo = naruto('http://ac.qq.com/Comic/comicInfo/id/544907')
+	# demo = naruto('http://ac.qq.com/Comic/comicInfo/id/544907')
+	demo = naruto('http://ac.qq.com/ComicView/index/id/544907/cid/24')
+	
 
 	# demo.download(url)
 

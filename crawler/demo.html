@@ -48,7 +48,7 @@
 
 
     function Base() {
-    	
+
         _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
 
         this.decode = function(c) {
@@ -62,6 +62,7 @@
             return a
         }
     }
+    
     var B = new Base;
     DATA = (new Function("return " + B.decode(DATA.substring(1))))();
 
