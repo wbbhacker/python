@@ -1,9 +1,12 @@
 #!/usr/bin/env python
 #coding:utf-8
 import os
-import logging
+# import logging
 import urllib2
 from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
+
 
 # request = urllib2.Request('http://www.baidu.com')
 # response = urllib2.urlopen(request)
@@ -15,30 +18,35 @@ class naruto:
 
 	def __init__(self,url):
 
-		soup = self.getHtml(url)
+		browser = webdriver.PhantomJS('phantomjs')
+		browser.get(url)
 
-		span = soup.find_all('ol', class_='chapter-page-all')[0].find_all('span',class_='works-chapter-item')
+		
+		print  browser.find_element_by_id('comicTitle')
 
-		# print len(span)
 
-		index = 1
-		for i in span :
-			try:
-				file_path = 'img/'+i.a['title']
-				# os.mkdir(file_path)
-				soup = self.getHtml('http://ac.qq.com'+i.a['href'])
 
-				if index == 1 :				
-					index = 2
-					print file_path
-					a = soup.find_all('ul',class_='comic-contain')[0]
-					print a
+		# soup = self.getHtml(url)
+		# span = soup.find_all('ol', class_='chapter-page-all')[0].find_all('span',class_='works-chapter-item')
 
-			except Exception,e:
-				print '**************************************'
-				print Exception,':',e
-    			
-			
+		# index = 1
+		# for i in span :
+		# 	try:
+		# 		file_path = 'img/'+i.a['title']
+		# 		# os.mkdir(file_path)
+		# 		soup = self.getHtml('http://ac.qq.com'+i.a['href'])
+
+		# 		if index == 1 :				
+		# 			index = 2
+		# 			# print file_path
+		# 			a = soup.find_all('ul',class_='comic-contain')[0]
+		# 			b = soup.find_all('script')
+		# 			print b
+
+		# 	except Exception,e:
+		# 		print '*************************************x *'
+		# 		print Exception,':',e
+
 	def getHtml(self,url):
 
 		request = urllib2.Request(url)
