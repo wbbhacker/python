@@ -1,73 +1,58 @@
 #!/usr/bin/env python
 #coding:utf-8
 import os
+import sys  
+import re
 import urllib2
+import decodeM
 from bs4 import BeautifulSoup
-
-
-# import logging
-# from selenium import webdriver
-# from selenium.common.exceptions import NoSuchElementException
-# request = urllib2.Request('http://www.baidu.com')
-# response = urllib2.urlopen(request)
-# html = response.read()
-# soup = BeautifulSoup(html)
-
+reload(sys)  
+sys.setdefaultencoding('utf8')  
 
 class naruto:
 
 	def __init__(self,url):
 
-		# browser = webdriver.PhantomJS('phantomjs')
-		# browser.get(url)
-		# elem = browser.find_element_by_id('comicContain').find_elements_by_css_selector('img')
-		# for i in elem :
-
-		# 	print i.get_attribute('src')
-
-		# print  browser.find_element_by_id('comicTitle')
-
-
-
-		soup = self.getHtml(url)
-		span = soup.find_all('ol', class_='chapter-page-all')[0].find_all('span',class_='works-chapter-item')
+		soup = self.getHtml(url,True)
+		chapters = soup.find_all('ol', class_='chapter-page-all')[0].find_all('span',class_='works-chapter-item')
 
 		index = 1
-		for i in span :
+
+		for i in chapters :
 			try:
 				file_path = 'img/'+i.a['title']
 				# os.mkdir(file_path)
-				soup = self.getHtml('http://ac.qq.com'+i.a['href'])
+				htmlStr = self.getHtml('http://ac.qq.com'+i.a['href'])
 
 				if index == 1 :				
 					index = 2
-					a = soup.find_all('ul',class_='comic-contain')[0]
-					b = soup.find_all('script')
-					
-					print b
+					data = re.search(r'\'\S{200,}\'',htmlStr).group()
+					print type(data)
+					with open('demo.txt','wb') as fp:
+						fp.write(data)
+					print decodeM.decode(data) 
 
 			except Exception,e:
-				print '*************************************x *'
+				print '**************************************'
 				print Exception,':',e
 
-	def getHtml(self,url):
+	def getHtml(self,url,flag=False):
 
 		request = urllib2.Request(url)
 		response = urllib2.urlopen(request)
 		html = response.read()
-		soup = BeautifulSoup(html)
-		return soup
+		if flag == True:
+			html = BeautifulSoup(html)
+		return html
+
 
 	@staticmethod
-
 	def download(url,save_path):
 
-		imgCon = urllib2.urlopen(url).read()
+		imgData = urllib2.urlopen(url).read()
+
 		with open(save_path,'wb') as fp:
-			fp.write(imgCon)
-
-		# print imgCon
-
+			fp.write(imgData)
 
 
 if __name__ == '__main__':
@@ -77,9 +62,6 @@ if __name__ == '__main__':
 
 	demo = naruto('http://ac.qq.com/Comic/comicInfo/id/544907')
 	# demo = naruto('http://ac.qq.com/ComicView/index/id/544907/cid/24')
-	
-
-	# demo.download(url)
 
 
 
