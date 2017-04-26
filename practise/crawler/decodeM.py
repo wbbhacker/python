@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # _*_ coding: UTF-8 _*_
 
-
 _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
 
 def fromCharCode(a, *b):
@@ -71,4 +70,4 @@ def decode(c):
 #     with open('demo.txt','rb+') as f:
 #         for data in f:
 #             # output json
-#             print decode(data[1:-2])
+#             print decode(data[1:-2]).decode('gbk')

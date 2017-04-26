@@ -1,13 +1,19 @@
 #!/usr/bin/env python
 #coding:utf-8
-import os
-import sys  
+import os 
 import re
 import urllib2
 import decodeM
 from bs4 import BeautifulSoup
-reload(sys)  
-sys.setdefaultencoding('utf8')  
+
+
+import codecs
+import sys
+UTF8Writer = codecs.getwriter('utf8')
+sys.stdout = UTF8Writer(sys.stdout)
+
+
+
 
 class naruto:
 
@@ -27,10 +33,21 @@ class naruto:
 				if index == 1 :				
 					index = 2
 					data = re.search(r'\'\S{200,}\'',htmlStr).group()
-					print type(data)
+
+					print '------------------------------'
+
+					getData = decodeM.decode(data)
+
+					print type(getData)
+					print getData
+
+					var = getData.encode('utf-8')
+
 					with open('demo.txt','wb') as fp:
+
 						fp.write(data)
-					print decodeM.decode(data) 
+
+					# print decodeM.decode(data) 
 
 			except Exception,e:
 				print '**************************************'
