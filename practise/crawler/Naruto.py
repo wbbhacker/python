@@ -7,12 +7,10 @@ import urllib2
 import decodeM
 from bs4 import BeautifulSoup
 
-
 import codecs
 import sys
 UTF8Writer = codecs.getwriter('utf8')
 sys.stdout = UTF8Writer(sys.stdout)
-
 
 class naruto:
 
@@ -24,34 +22,17 @@ class naruto:
         index = 1
 
         for i in chapters :   
+
             try:
                 file_path = 'img/'+i.a['title']
-                # os.mkdir(file_path)
                 htmlStr = self.getHtml('http://ac.qq.com'+i.a['href'])
-
-                if index == 1 :             
-                    index = 2
-
-                    data = re.search(r'\'\S{200,}\'',htmlStr).group()[1:-1]
-
-                    # getData = decodeM.decode(data[1:])
-
-                    json_data = json.loads(decodeM.decode(data[1:]))
+                data = re.search(r'\'\S{200,}\'',htmlStr).group()[1:-1]
                   
+                os.mkdir(file_path)
+                json_data = json.loads(decodeM.decode(data[1:]))
 
-                    # for j in json_data['picture']:
-                    #     print j['url']
-
-                    for j,n in enumerate(json_data['picture']):
-                        print j
-                        print n['url']
-
-
-                    # with open('demo.txt','wb') as fp:
-
-                    #     fp.write(getData)
-
-                    # print decodeM.decode(data) 
+                for j,n in enumerate(json_data['picture']):
+                    self.download(n['url'],file_path+'/'+str(j)+'.jpg')
 
             except Exception,e:
                 print '**************************************'
@@ -65,7 +46,6 @@ class naruto:
         if flag == True:
             html = BeautifulSoup(html)
         return html
-
 
     @staticmethod
     def download(url,save_path):
@@ -82,6 +62,7 @@ if __name__ == '__main__':
     # save_path = 'img/2.jpg'
 
     demo = naruto('http://ac.qq.com/Comic/comicInfo/id/544907')
+    
     # demo = naruto('http://ac.qq.com/ComicView/index/id/544907/cid/24')
 
 
