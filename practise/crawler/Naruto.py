@@ -43,7 +43,9 @@ class naruto:
                     #     print j['url']
 
                     for j,n in enumerate(json_data['picture']):
-                        print j
+                        # self.download()
+
+                        # print file_path+j
                         print n['url']
 
 
