@@ -21,3 +21,7 @@ def detail(request,a,b):
 
 def login(request):
 	return render(request,'login.html')
+
+
+def home(request):
+	return render(request,'home.html')
