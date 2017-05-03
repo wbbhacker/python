@@ -31,26 +31,9 @@ class naruto:
                 os.mkdir(file_path)
                 json_data = json.loads(decodeM.decode(data[1:]))
 
-<<<<<<< HEAD
-                    # for j in json_data['picture']:
-                    #     print j['url']
 
-                    for j,n in enumerate(json_data['picture']):
-                        # self.download()
-
-                        # print file_path+j
-                        print n['url']
-
-
-                    # with open('demo.txt','wb') as fp:
-
-                    #     fp.write(getData)
-
-                    # print decodeM.decode(data) 
-=======
                 for j,n in enumerate(json_data['picture']):
                     self.download(n['url'],file_path+'/'+str(j)+'.jpg')
->>>>>>> d470a2685f6b00aab65a0059cc4696feb51658de
 
             except Exception,e:
                 print '**************************************'
