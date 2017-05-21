@@ -16,7 +16,7 @@ def index(request):
 
 def detail(request,my_args):
 	post = Article.objects.all()[int(my_args)]
-	str = ('title = %s,category = %s, data_time = %s,content = %s' % (post.title,post.category,post.data_time,post.content))
+	str = ('title = %s,category = %s, data_time = %s,content = %s' % (post.title,post.category,post.add_time,post.content))
 	return HttpResponse(str)
 def home(request):
 	post_list = Article.objects.all()
