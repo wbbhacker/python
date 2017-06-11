@@ -11,7 +11,9 @@ from datetime import datetime
 # Create your views here.
 
 def index(request):
-	return HttpResponse('hello,world,Django')
+	
+	return render(request,'index.html')
+	# return HttpResponse('sss')
 
 
 def detail(request,my_args):
