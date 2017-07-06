@@ -13,6 +13,12 @@ def loadImg():
 		
 
 def saveImg(url,path):
+
+	paths = os.path.split(path);
+
+	if os.path.exists(paths[0]) == False:
+		os.makedirs(paths[0])
+
 	imgCon = urllib2.urlopen(url).read()
 
 	with open(path,'wb') as fp:
