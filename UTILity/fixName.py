@@ -15,4 +15,4 @@ def fixName(path,name):
 			os.rename(orgName,newName)
 
 if __name__ == '__main__':
-	fixName('kv-wen','kv-wen')
+	fixName('kv-wen','kv-wen')                                                                                                                                                                                                                                                              
